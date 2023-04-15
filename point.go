@@ -3,7 +3,7 @@ package geomath
 import "math"
 
 type Point struct {
-	Latitude, Longitude float32
+	Latitude, Longitude float64
 }
 
 func (p Point) NearestOf(points ...Point) Point {
