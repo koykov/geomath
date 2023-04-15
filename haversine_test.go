@@ -11,7 +11,7 @@ var refPoints = []Point{
 	{Latitude: 34.0522, Longitude: -118.2436}, // US/LA
 }
 
-func TestHaversine(t *testing.T) {
+func TestDistanceHaversine(t *testing.T) {
 	type stage struct {
 		Point
 		city string
@@ -63,7 +63,7 @@ func TestHaversine(t *testing.T) {
 	}
 }
 
-func BenchmarkHaversine(b *testing.B) {
+func BenchmarkDistanceHaversine(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		_ = DistanceHaversine(Point{Latitude: 48.85002, Longitude: 2.600178}, refPoints[0])
 	}
