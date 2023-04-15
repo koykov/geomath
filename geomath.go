@@ -7,3 +7,9 @@ const (
 	deg2rad     = math.Pi / 180
 	rad2deg     = 180 / math.Pi
 )
+const (
+	Haversine DistanceCalculation = iota
+	SLC
+)
+
+type DistanceCalculation uint8

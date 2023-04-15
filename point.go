@@ -7,20 +7,29 @@ type Point struct {
 }
 
 func (p Point) NearestOf(points ...Point) Point {
-	p1, _, _ := p.NearestOfWithDetails(points...)
+	p1, _, _ := p.NearestOfWithOptions(Haversine, points...)
 	return p1
 }
 
-func (p Point) NearestOfWithDetails(points ...Point) (Point, int, Distance) {
+func (p Point) NearestOfWithOptions(method DistanceCalculation, points ...Point) (Point, int, Distance) {
 	if len(points) == 0 {
 		return Point{}, -1, 0
 	}
 	var (
 		md = Distance(math.MaxFloat64)
 		mi int
+		fn func(Point, Point) Distance
 	)
+	switch method {
+	case Haversine:
+		fn = DistanceHaversine
+	case SLC:
+		fn = DistanceSLC
+	default:
+		return Point{}, -1, 0
+	}
 	for i := 0; i < len(points); i++ {
-		dist := DistanceHaversine(p, points[i])
+		dist := fn(p, points[i])
 		if dist < md {
 			md = dist
 			mi = i

@@ -15,7 +15,7 @@ func TestPoint(t *testing.T) {
 	}
 	for _, st := range stages {
 		t.Run(st.city, func(t *testing.T) {
-			_, idx, _ := st.point.NearestOfWithDetails(refPoints...)
+			_, idx, _ := st.point.NearestOfWithOptions(Haversine, refPoints...)
 			if idx != st.idx {
 				t.Errorf("nearest point mismatch: %d vs %d", idx, st.idx)
 			}
