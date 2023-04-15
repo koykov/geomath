@@ -45,17 +45,17 @@ func TestHaversine(t *testing.T) {
 	const prec = 1 / 1e6
 	for _, st := range stages {
 		t.Run(st.city, func(t *testing.T) {
-			distEU := Haversine(st.Point, refPoints[0])
+			distEU := DistanceHaversine(st.Point, refPoints[0])
 			if km := distEU.Kilometers(); math.Abs(km-st.eu) > prec {
 				t.Errorf("EU distance mismatch: %f vs %f", km, st.eu)
 			}
 
-			distHK := Haversine(st.Point, refPoints[1])
+			distHK := DistanceHaversine(st.Point, refPoints[1])
 			if km := distHK.Kilometers(); math.Abs(km-st.as) > prec {
 				t.Errorf("AS distance mismatch: %f vs %f", km, st.as)
 			}
 
-			distUS := Haversine(st.Point, refPoints[2])
+			distUS := DistanceHaversine(st.Point, refPoints[2])
 			if km := distUS.Kilometers(); math.Abs(km-st.us) > prec {
 				t.Errorf("US distance mismatch: %f vs %f", km, st.us)
 			}
@@ -65,6 +65,6 @@ func TestHaversine(t *testing.T) {
 
 func BenchmarkHaversine(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		_ = Haversine(Point{Latitude: 48.85002, Longitude: 2.600178}, refPoints[0])
+		_ = DistanceHaversine(Point{Latitude: 48.85002, Longitude: 2.600178}, refPoints[0])
 	}
 }

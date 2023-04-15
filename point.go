@@ -20,7 +20,7 @@ func (p Point) NearestOfWithDetails(points ...Point) (Point, int, Distance) {
 		mi int
 	)
 	for i := 0; i < len(points); i++ {
-		dist := Haversine(p, points[i])
+		dist := DistanceHaversine(p, points[i])
 		if dist < md {
 			md = dist
 			mi = i
